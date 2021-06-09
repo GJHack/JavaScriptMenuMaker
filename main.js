@@ -1,6 +1,8 @@
 const wWindow = document.documentElement.clientWidth;
 const hWindow = document.documentElement.clientHeight;
 const containMenu = document.querySelector('.menuArea');
+const [inline,block] = ['inline-block','block'];
+
 const menuName = ['main','about','listens','0','Bonjour'];
 
 menuShower(menuMaker(menuName));
@@ -29,7 +31,8 @@ function menuMaker(menuName) {
   return menu;
 }
 /**
- * param {function} menuMaker
+ * param {function} menuMaker]
+ * 51 String. Working only with English lang. Rewrite this if you speaking any lang
  */
 function menuShower(menu) {
   const container = document.createElement('ul');
@@ -37,9 +40,16 @@ function menuShower(menu) {
   containMenu.appendChild(container);
   for(let prop of menu) {
     const staff = document.createElement('li');
+    staff.style.display = block; //inline; or block;
+    staff.addEventListener('click',clickMove);
     staff.classList.add('change');
     staff.innerText = prop.name;
     container.appendChild(staff);
+    function clickMove() {
+      staff.style.marginLeft = '10%';
+      setTimeout(()=>staff.style.marginLeft = '1%',1000);
+      setTimeout(()=>location.href=`${staff.innerText}.html`,1200); //// Only EN lang working;
+    }
   }
 }
 function myProp() {
